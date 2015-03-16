@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<?php
+session_start();
+echo $_SESSION['Email'];
+?>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link type="text/css" rel="stylesheet" href="stylesheet.css" />
+    <meta charset="utf-8" />
+    <title>Welcome!</title>
+</head>
+<body>
+    <ul id="nav">
+            <li><a href="student.html"target="_self">
+        Home</a></li>
+            <li><a href="#">Requests</a>
+                <ul>
+                    <li><a href="" target="_blank">
+                        Request Shift Trade</a></li> 
+                    <li><a href="" target="_blank">
+                        Request Shift Drop</a></li>   
+                    <li><a href="javascript:window.print()">
+                        Print Current Schedule</a></li>
+                    <li><a href="ssSchedule.html" target="_self">
+                        View/Make Requests Saturday/Sunday Schedule</a></li>
+                </ul>
+    <h2>Here is the schedule for your unit:</h2>
+
+	<?php
+	$schedule_query = "SELECT * FROM schedule";
+	$result = mysqli_query($sql_link, $country_query);
+	$new_row = array();
+	while($row = mysqli_fetch_assoc($result)){
+		$studentID = $row['StudentID'];
+		$query = sprintf("SELECT Job, Hours, Day FROM schedule WHERE StudentID = '%s'", 12345678);
+		$schedule_result = mysqli_query($sql_link, $query);
+		while ($schedule_row = mysqli_fetch_assoc($schedule_result)){
+			$new_row[$schedule][]= array('Job' => $schedule_row['Job'],
+								'Hours' => $schedule_row['Hours'],
+								'Day' => $schedule_row['Day']);
+		}
+	}
+     
+	<?php foreach($new_row as $schedule => $rows):?>
+		<?php foreach)$rows as $row): ?>
+			<tr>
+				<td><?=$schedule;?></td>
+				<td><?=$row['Job'];?></td>
+				<td><?=$row['Hours'];?></td>
+				<td><?=$row['Day'];?></td>
+			</tr>
+		<?php endforeach;?>
+	<?php endforeach;?>
+      
+   <table width="80%" align="center" >
+    <div id="head_nav">
+    
+</table>
+</body>
+</html>

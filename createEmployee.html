@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link type="text/css" rel="stylesheet" href="stylesheet.css" />
+    <meta charset="utf-8" />
+    <title>Create Employee</title>
+</head>
+<body>
+    <li><a href="director.html"target="_self">
+        Home</a></li>
+    <h3>Create New Employee</h3>
+
+    <form method="POST" action="createEmployee.php">
+        <fieldset>
+        <legend>Employee information:</legend>
+        
+        <!-- Assign an employee a unit too? and what about altering the unit? -->
+
+        <input type="radio" name="employeeType" value="Student" >Employee 
+        <br>
+         <input type="radio" name="employeeType" value="Manager" >Manager
+        <br><br>
+        First name:<br>
+        <input type="text" name="firstName">
+        <br>
+        Last name:<br>
+        <input type="text" name="lastName">
+        <br>
+        Phone Number:<br>
+        <input type="text" name="phoneNumber" />
+        <br>
+        Address:<br>
+        <input type="text" name="address"  />
+        <br>
+        Email:<br>
+        <input type="text" name="email"  />
+        <br>
+        Password:<br>
+        <input type="text" name="password" />
+        <br>
+        Employee ID #:<br>
+        <input type="text" name="studentID" />
+        <br>
+        Unit:<br>
+        <input type="text" name="unit" />
+        <br><br>
+        <input type="submit" name ="submit" value="Submit"></fieldset>
+        </form>
+
+</body>
+</html>
