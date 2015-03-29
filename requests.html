@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<?php
+session_start();
+echo $_SESSION['Email'];
+?>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link type="text/css" rel="stylesheet" href="stylesheet.css" />
+    <meta charset="utf-8" />
+    <title>Create Employee</title>
+</head>
+<body>
+	<ul id="nav">
+            <li><a href="director.html" target="_self">
+                Home</a></li>
+            <li><a href="#">Requests</a>
+                <ul>
+                    <li><a href="createEmployee.html" target="_self">
+                        Create New Employee</a></li> 
+                    <li><a href="removeEmployee.html" target="_self">
+                        Remove Employee</a></li>   
+                    <li><a href="" target="_self">
+                        View Shift Requests</a></li>    
+                    <li><a href="javascript:window.print()">
+                        Print Current Schedules</a></li>
+                    <li><a href="ssSchedule.html" target="_self">
+                        View/Change Saturday/Sunday Schedule</a></li>    
+                </ul>
+    
+	
+	
+	<h2>Students requesting more shifts</h2>
+	
+	<?php
+	$requests_query = "SELECT * FROM requests WHERE RequestType = 'Add'";
+	$result = mysqli_query($sql_link, $requests_query);
+	$new_row = array();?>
+	
+	
+	<?php foreach($new_row as $requests => $rows):?>
+		 <?php foreach)$rows as $row): ?>
+			<tr>
+				<td><?=$requests;?></td>
+				<td><?=$row['StudentID1'];?></td>
+				<td><?=$row['JobID'];?></td>
+			</tr>
+		<?php endforeach;?>
+	 <?php endforeach;?>
+	
+	<h2>Students requesting a shifts to be covered</h2>
+	
+	<?php
+	$requests_query = "SELECT * FROM requests WHERE RequestType = 'Drop'";
+	$result = mysqli_query($sql_link, $requests_query);
+	$new_row = array();?>
+	
+	
+	<?php foreach($new_row as $requests => $rows):?>
+		<?php foreach)$rows as $row): ?>
+			<tr>
+				<td><?=$requests;?></td>
+				<td><?=$row['StudentID1'];?></td>
+				<td><?=$row['JobID'];?></td>
+			</tr>
+		<?php endforeach;?>
+	<?php endforeach;?>
+	
+	<h2>Students requesting to trade shifts</h2>
+        
+		<?php
+	$requests_query = "SELECT * FROM requests WHERE RequestType = 'Trade'";
+	$result = mysqli_query($sql_link, $requests_query);
+	$new_row = array();?>
+	
+	
+	<?php foreach($new_row as $requests => $rows):?>
+		<?php foreach)$rows as $row): ?>
+			<tr>
+				<td><?=$requests;?></td>
+				<td><?=$row['StudentID1'];?></td>
+				<td><?=$row['StudentID2'];?></td>
+				<td><?=$row['JobID'];?></td>
+			</tr>
+		<?php endforeach;?>
+	<?php endforeach;?>
+	
+        
+
+</body>
+</html>

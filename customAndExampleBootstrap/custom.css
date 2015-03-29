@@ -1,3 +1,29 @@
-﻿body
-{
-}
+﻿
+    html { overflow-y: hidden; }
+
+    h1
+    { color: transparent; }
+
+    body
+    { background-image: url("../images/ballState.png"); background-size: cover;} 
+
+    .ContentLineBreak
+	{ height:12px; clear:both; padding-top:0px !important; width:100%; }
+
+    .myContainer 
+	{ clear:both; width:940px; margin-left:auto; margin-right:auto; text-align:left; }
+
+    .divider 
+	{ background-color:#333c45; clear:both; height:5px; border:1px solid #ffffff; padding-bottom:initial; }
+
+    .footer 
+	{ line-height:150%; clear:both; padding:20px 0px 0px 0px; font-size:90%; margin-bottom:25px; }
+
+    .form-signin
+    { color: black; }
+
+    .btn
+    { color: black ; background-color: #D11919; border-color: black; }
+
+    .btn:hover
+    { background-color: #D11919; }
