@@ -1,31 +1,82 @@
 ﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
 
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-   <!-- <link type="text/css" rel="stylesheet" href="stylesheet.css" /> -->
-    <meta charset="utf-8" />
-    <title>BSU Dining Services Login</title>
+    <title>Ball State Dining Login</title>
     <style>
-        p {
+        p 
+        {
             color: red;
-          }
+        }
     </style>
-    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-</head>
-<body>
-    <script src="http://code.jquery.com/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <h3>Ball State University Dining Services Login</h3>
-    <form method="POST" action="action.php">
-        <fieldset>
-        <legend>Type your user name and password:</legend>
-        <p>You entered an incorrect email and password, please retry</p>
-        Username: <input type="text" name="user" />
-            <br><br>
-         Password: <input type="password" name="pwd"/>
-            <br><br>
-          <input type="submit" value="Submit" name="submit"/>
-		   </fieldset>
-        </form>
-</body>
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap-3.3.4/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="customAndExampleBootstrap/signin.css" rel="stylesheet">
+    <link href="customAndExampleBootstrap/customLogin.css" rel="stylesheet">
+
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+    
+  <body>
+  
+      <div class="container">
+          <div style ="float: left"> 
+              <a href="http://cms.bsu.edu/campuslife/dining" > 
+              <img height="200" width ="200" src="images/diningImage.jpg" alt="Dining Logo"> </a>
+          </div>
+
+       <h1>invisible</h1>
+       <h1>invisible</h1>
+           
+      <form class="form-signin" method="POST" action="action.php">
+        <h2 class="form-signin-heading">Type your email and password.</h2>
+        <p>You entered an incorrect email and password, please retry.</p>
+        <label for="inputEmail" class="sr-only" ">Email address</label>
+        <input type="email" id="inputEmail" class="form-control" name="user"; placeholder="Email address" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" name="pwd" id="inputPassword" class="form-control" placeholder="Password" required>
+        <div class="checkbox">
+
+        </div>
+        <button class="btn btn-lg btn-primary btn-block"  type="submit" value ="Submit" name ="submit">Sign in</button>
+      </form>
+
+    </div> <!-- /container -->
+  
+    <div class="divider"></div>
+    <div class="myContainer">
+        <div class="footer">
+            <b>Created by Computer Science Students Andrew Thomas, <br /> Conor Williamson, Jeffery McDaniel, and Ryan Waltom <br /> for Ball State Dining. </b>
+            <br />
+            <br /> Ball State University
+            <br />2000 W. University Ave. Muncie, IN 47306<br />
+ 
+            <a href="http://cms.bsu.edu/about/administrativeoffices/its">Information Technology Services</a>
+            &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+            <a href="http://www.bsu.edu/helpdesk">UTS Help Desk</a>
+ 
+        </div>
+    </div>
+
+
+
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
 </html>
