@@ -23,13 +23,13 @@ function SignIn()
             $_SESSION['Email'] = $row['Email']; 
 			
             if($row['EmployeeType'] == "Student"){
-					header("Location: student2.php");
+					header("Location: student.php");
 				}	
 			else if($row['EmployeeType'] == "Manager"){
-					header("Location: manager.html");
+					header("Location: manager.php");
 			}
 			else if($row['EmployeeType'] == "Director"){
-					header("Location: director.html");
+					header("Location: director.php");
 			}
 				
         } 
