@@ -1,5 +1,4 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
 <?php
 session_start();
 define('DB_HOST', 'localhost');
@@ -22,7 +21,8 @@ $rowID = mysqli_fetch_array($queryID);
 			}      
 ?>
 
-  <head>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -47,11 +47,10 @@ $rowID = mysqli_fetch_array($queryID);
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-  </head>
-
-  <body>
-
-    <!-- Static navbar -->
+</head>
+<body>
+   
+	<!-- Static navbar -->
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -59,53 +58,78 @@ $rowID = mysqli_fetch_array($queryID);
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">Open Shifts</a></li>
-            <li><a href="#contact">Print</a></li>
-			<li><a href="#contact">Weekend Schedule</a></li>
+            <li class="active"><a href="student.php"target="_self">Home</a></li>
+            <li><a href="openShifts.php" target="_self">Open Shifts</a></li>
+            <li><a href="javascript:window.print()">Print</a></li>
+			<li><a href="ssSchedule.php" target="_self">Weekend Schedule</a></li>
           </ul>
          
 		  <ul class="nav navbar-nav navbar-right">
-            <li class="active"> <a href="./">Sign Out<span class="sr-only">stuff here</span></a></li>
+            <li class="active"> <a href="logout.php" target="_self">Sign Out<span class="sr-only"></span></a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-
-
-    <h3>Here is the current schedule for your unit:<h3>
-	<p>don't forget to pull image<p>
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-  </body>
-</html>
-
-
-
-<table width="50%">
+	
+			
+	<h2>Announcements</h2>
+	
+	<table width="40%"  border="1"  >
     <div id="head_nav">
+	
+	<?php 
+	
+	
+	$announcements_query = "SELECT * FROM announcements";
+	$result = mysqli_query($con, $announcements_query);
+	$new_row = array();
+		$studentID = $row['StudentID'];
+		$Unit_query = "SELECT Unit FROM employee WHERE Email = '$test'";
+		$Unit_result = mysqli_query($con, $Unit_query);
+		$row = mysqli_fetch_row($Unit_result);
+		$Unit_employee = $row[0]; 
+		$query = sprintf("SELECT Announcement, Date FROM announcements WHERE Unit = '%s'", $Unit_employee);
+		$announcements_result = mysqli_query($con, $query);
+		while ($announcements_row = mysqli_fetch_assoc($announcements_result)){
+			$new_row[$studentID][]= array('Announcement' => $announcements_row['Announcement'],
+								'Date' => $announcements_row['Date']);
+		}
+		
+     ?>
+	 
+	<?php foreach($new_row as $studentID => $rows):?>
+		<?php foreach($rows as $row): ?>
+			<tr>
+				<td><?=$row['Date'];?></td>
+				<td><?=$row['Announcement'];?></td>
+				<br>
+			</tr>
+		<?php endforeach;?>
+	<?php endforeach;  ?>
+	
+	</div>
+	</table>
 
+	
+    <h2>Here is the schedule for your unit:</h2>
+	<p> dont forget to pull image: </p>
+	<table width="40%"  border="1" >
+    <div id="head_nav">
+	
 	<?php
 	$schedule_query = "SELECT * FROM schedule";
 	$result = mysqli_query($con, $schedule_query);
-	$new_row = array();
-		$studentID = $row['StudentID'];
-		$query = sprintf("SELECT Job, Hours, Day, JobNumber FROM schedule WHERE StudentID = '%s'", $row['StudentID']);
-		$schedule_result = mysqli_query($con, $query);
+	$new_row2 = array();
+		$query2 = sprintf("SELECT Job, Hours, Day, JobNumber FROM schedule WHERE StudentID = '%s'", $studentID);
+		$schedule_result = mysqli_query($con, $query2);
 		while ($schedule_row = mysqli_fetch_assoc($schedule_result)){
-			$new_row[$studentID][]= array('Job' => $schedule_row['Job'],
+			$new_row2[$studentID][]= array('Job' => $schedule_row['Job'],
 								'Hours' => $schedule_row['Hours'],
 								'Day' => $schedule_row['Day']);
 		}
      ?>
 	 
-	<?php foreach($new_row as $studentID => $rows):?>
+	<?php foreach($new_row2 as $studentID => $rows):?>
 		<?php foreach($rows as $row): ?>
 			<tr>
 				<td><?=$row['Job'];?></td>
@@ -116,8 +140,9 @@ $rowID = mysqli_fetch_array($queryID);
 			</tr>
 		<?php endforeach;?>
 	<?php endforeach;?>
-  
-   </div> 
+      
+
+    </div>
 </table>
 </body>
 </html>

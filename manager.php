@@ -22,104 +22,58 @@ $rowID = mysqli_fetch_array($queryID);
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <link type="text/css" rel="stylesheet" href="customAndExampleBootstrap/stylesheet.css" />
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
     <title>Welcome!</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap-3.3.4/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="customAndExampleBootstrap/navbar-fixed-top.css" rel="stylesheet">
+	<link href="customAndExampleBootstrap/customSchedules.css" rel="stylesheet">
+
+    <!--<script src="../../assets/js/ie-emulation-modes-warning.js"></script> -->
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
 </head>
 <body>
-    <ul id="nav">
-            <li><a href="manager.html"target="_self">
-        Home</a></li>
-            <li><a href="requests.php">Requests</a>
-                <ul>
-                    <li><a href="javascript:window.print()">
-                        Print Current Schedule</a></li>
-          
-                <li><a href="ssSchedule.html" target="_self">
-                        View/Change Saturday/Sunday Schedule</a></li> 
-                </ul>
+   
+	<!-- Static navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" style="background-color:black; color:white;">Dining Schedule </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="manager.php"target="_self">Home</a></li>
+			<li><a href="openShifts.php" target="_self">Open Shifts</a></li>
+			<li><a href="weekendRequests.php" target="_self">View Weekend Requests</a></li>
+			<li><a href="ssScheduleM.php" target="_self">Weekend Schedules</a></li>
+			<li><a href="javascript:window.print()">Print</a></li>
+          </ul>
+         
+		  <ul class="nav navbar-nav navbar-right">
+            <li class="active"> <a href="logout.php" target="_self">Sign Out<span class="sr-only"></span></a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+				
     <h2>Here is the Monday-Friday schedeule for your unit:</h2>
+	<p> pull image </p>
 
-                <table width="80%" align="center" >
-    <div id="head_nav">
-    <tr>
-        <th></th>
-        <th>Job</th>
-        <th>Hours</th>
-        <th>Monday</th>
-        <th>Tuesday</th>
-        <th>Wednesday</th>
-        <th>Thrusday</th>
-        <th>Friday</th>
-        
-    </tr>
-</div>  
-
-    <tr>
-        <th>1</th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>           
-                       
-        </div>
-    </tr>
-
-    <tr>
-        <th>2</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>           
-
-        </div>
-    </tr>
-
-    <tr>
-        <th>3</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>          
-
-
-        </div>
-    </tr>
-
-    <tr>
-        <th>4</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-
-        </div>
-    </tr>
-
-    <tr>
-        <th>5</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>         
-
-        </div>
-    </tr>
-</table>
 </body>
 </html>
