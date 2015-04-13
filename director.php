@@ -21,7 +21,7 @@ $rowID = mysqli_fetch_array($queryID);
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <link type="text/css" rel="stylesheet" href="stylesheet.css" />
+    <link type="text/css" rel="stylesheet" href="customAndExampleBootstrap/stylesheet.css" />
     <meta charset="utf-8" />
     <title>Welcome!</title>
 </head>

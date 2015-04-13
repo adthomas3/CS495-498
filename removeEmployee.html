@@ -2,27 +2,63 @@
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-   <!-- <link type="text/css" rel="stylesheet" href="stylesheet.css" /> -->
-    <meta charset="utf-8" />
+   <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
     <title>Remove Employee</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap-3.3.4/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="customAndExampleBootstrap/signin.css" rel="stylesheet">
+    <link href="customAndExampleBootstrap/customRemoveEmployee.css" rel="stylesheet">
+
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body>
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <li><a href="director.html"target="_self">
-        Home</a></li>
 
-    <h3></h3>
+    <!-- Static navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="director.php"target="_self">Home</a></li>
+
+          </ul>
+         
+		  <ul class="nav navbar-nav navbar-right">
+            <li class="active"> </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <h3>Remove Employee</h3>
 
     <form method="POST" action="removeEmployee.php">
         <fieldset>
         <legend>Enter the ID of the employee to remove:</legend>
             <p></p>
-        Employee ID #: <input type="text" name="employeeID" />
-            <br><br>
+        Employee ID #: 
+            <br />
+            <input type="text" name="employeeID" />
+            <br /> <br />
           
-        <input type="submit" value="Submit" name="submit"/>
+        <button class="btn btn-lg btn-primary"  type="submit" value ="Submit" name ="submit">Remove Employee</button>
 		</fieldset>
     </form>
 

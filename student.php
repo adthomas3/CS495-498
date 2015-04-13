@@ -55,7 +55,7 @@ $rowID = mysqli_fetch_array($queryID);
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#" style="background-color:black">Dining Schedule </a>
+          <a class="navbar-brand" style="background-color:black; color:white;">Dining Schedule </a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -66,7 +66,7 @@ $rowID = mysqli_fetch_array($queryID);
           </ul>
          
 		  <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a href="./">Sign Out<span class="sr-only">stuff here</span></a></li>
+            <li class="active"> <a href="./">Sign Out<span class="sr-only">stuff here</span></a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -88,7 +88,8 @@ $rowID = mysqli_fetch_array($queryID);
 
 
 
-
+<table width="50%">
+    <div id="head_nav">
 
 	<?php
 	$schedule_query = "SELECT * FROM schedule";
@@ -110,15 +111,13 @@ $rowID = mysqli_fetch_array($queryID);
 				<td><?=$row['Job'];?></td>
 				<td><?=$row['Hours'];?></td>
 				<td><?=$row['Day'];?></td>
-				<td><form action="requestoff.php" method="POST"> <input type="submit" value="Request shift off"> </form></td>
+				<td><form action="requestoff.php" method="POST"> <button class="btn btn-lg btn-primary"  type="submit" value ="Request shift off">Request Shift off</button> </form></td>
 				<br>
 			</tr>
 		<?php endforeach;?>
 	<?php endforeach;?>
-      
-   <table width="80%" align="center" >
-    <div id="head_nav">
-    
+  
+   </div> 
 </table>
 </body>
 </html>

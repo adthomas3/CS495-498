@@ -27,7 +27,7 @@
     { color: black; }
 
     .btn
-    { color: black ; background-color: #D11919; border-color: black; }
+    { color: white; background-color: #D11919; border-color: black; }
 
     .btn:hover
-    { background-color: #D11919; }
+    { color: black; background-color: #D11919; }
