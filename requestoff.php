@@ -13,12 +13,10 @@ $query = mysqli_query($con, "SELECT StudentID FROM employee WHERE Email = '$test
 $row = mysqli_fetch_array($query); 
 $studentID = $row['StudentID'];
 
-$query = mysqli_query($con, "SELECT JobNumber FROM schedule WHERE studentID = '$studentID'");
-$row = mysqli_fetch_array($query); 
-$JobNumber = $row['JobNumber'];
+$JobNumber = $_POST['JobNumber'];
 
 
-$sql = "INSERT INTO requests (StudentID1,StudentID2,JobNumber,RequestType) VALUES($studentID,null,$JobNumber,'drop')";
+$sql = "INSERT INTO requests (StudentID1,StudentID2,JobNumber,RequestType) VALUES($studentID,0,$JobNumber,'Trade')";
 
 if ($con->query($sql) === TRUE) {
     echo "Request Sent";

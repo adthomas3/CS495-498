@@ -56,19 +56,11 @@ $rowID = mysqli_fetch_array($queryID);
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="director.php"target="_self">Home</a></li>
-            <li><a href="requests.php" target="_self">Requests</a></li>
 
 			<li><a href="createEmployee.html" target="_self">Create Employee</a></li>
-			<li><a href="removeEmployee.html" target="_self">Remove Employee</a></li>
+			<li><a href="removeEmployee.php" target="_self">Employee Information</a></li>
 
 			<li><a href=".php" target="_self">View Shift Records</a></li>
-
-
-			<li><a href="ssSchedule.php" target="_self">Weekend Schedule</a></li>
-
-
-			<li><a href=".php" target="_self">View All Employees</a></li>
-
 
             <li><a href="javascript:window.print()">Print</a></li>
 

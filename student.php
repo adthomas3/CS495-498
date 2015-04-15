@@ -60,8 +60,8 @@ $rowID = mysqli_fetch_array($queryID);
           <ul class="nav navbar-nav">
             <li class="active"><a href="student.php"target="_self">Home</a></li>
             <li><a href="openShifts.php" target="_self">Open Shifts</a></li>
-            <li><a href="javascript:window.print()">Print</a></li>
 			<li><a href="ssSchedule.php" target="_self">Weekend Schedule</a></li>
+			<li><a href="javascript:window.print()">Print</a></li>
           </ul>
          
 		  <ul class="nav navbar-nav navbar-right">
@@ -88,7 +88,7 @@ $rowID = mysqli_fetch_array($queryID);
 		$Unit_result = mysqli_query($con, $Unit_query);
 		$row = mysqli_fetch_row($Unit_result);
 		$Unit_employee = $row[0]; 
-		$query = sprintf("SELECT Announcement, Date FROM announcements WHERE Unit = '%s'", $Unit_employee);
+		$query = sprintf("SELECT Announcement, Date FROM announcements WHERE Unit = '%s' OR Unit ='All'", $Unit_employee);
 		$announcements_result = mysqli_query($con, $query);
 		while ($announcements_row = mysqli_fetch_assoc($announcements_result)){
 			$new_row[$studentID][]= array('Announcement' => $announcements_row['Announcement'],
@@ -125,7 +125,8 @@ $rowID = mysqli_fetch_array($queryID);
 		while ($schedule_row = mysqli_fetch_assoc($schedule_result)){
 			$new_row2[$studentID][]= array('Job' => $schedule_row['Job'],
 								'Hours' => $schedule_row['Hours'],
-								'Day' => $schedule_row['Day']);
+								'Day' => $schedule_row['Day'],
+								'JobNumber' => $schedule_row['JobNumber']);
 		}
      ?>
 	 
@@ -135,7 +136,7 @@ $rowID = mysqli_fetch_array($queryID);
 				<td><?=$row['Job'];?></td>
 				<td><?=$row['Hours'];?></td>
 				<td><?=$row['Day'];?></td>
-				<td><form action="requestoff.php" method="POST"> <button class="btn btn-lg btn-primary"  type="submit" value ="Request shift off">Request Shift off</button> </form></td>
+				<td><form action="requestoff.php" method="POST"> <button name="JobNumber" class="btn btn-lg btn-primary"  type="submit" value ="<?php echo $row['JobNumber']?>">Request Shift off</button></form></td>
 				<br>
 			</tr>
 		<?php endforeach;?>

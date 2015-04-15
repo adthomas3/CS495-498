@@ -61,7 +61,7 @@ $rowID = mysqli_fetch_array($queryID);
             <li class="active"><a href="manager.php"target="_self">Home</a></li>
 			<li><a href="openShifts.php" target="_self">Open Shifts</a></li>
 			<li><a href="weekendRequests.php" target="_self">View Weekend Requests</a></li>
-			<li><a href="ssScheduleM.php" target="_self">Weekend Schedules</a></li>
+			<li><a href="ssSchedule.php" target="_self">Weekend Schedules</a></li>
 			<li><a href="javascript:window.print()">Print</a></li>
           </ul>
          

@@ -14,3 +14,6 @@
     .navbar-default .navbar-nav > .active > a:hover, 
     .navbar-default .navbar-nav > .active > a:focus 
     { color: black; background-color: white; }
+
+    p
+    { color: red; font-weight: bold; }
