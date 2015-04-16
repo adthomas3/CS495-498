@@ -109,32 +109,78 @@ $rowID = mysqli_fetch_array($queryID);
 	
 	</div>
 	</table>
-
-	
     <h2>Here is the schedule for your unit:</h2>
-	<p> dont forget to pull image: </p>
+
+	<?php
+    
+    $Unit_query = "SELECT Unit FROM employee WHERE Email = '$test'";
+   	 $Unit_result = mysqli_query($con, $Unit_query);
+   	 $row = mysqli_fetch_row($Unit_result);
+   	 $Unit_employee = $row[0];
+    
+switch ($Unit_employee) {
+   case 'Atrium':
+   	  $logo = 'images/atriumlogo.gif';
+     	break;
+   case 'Elliot':
+     	$logo = 'images/elliott.gif';
+     	break;
+   case 'LaFollette':
+     	$logo = 'images/lafollettelogo.gif';
+     	break;
+    case 'Noyer':
+     	$logo = 'images/noyerlogocolor.gif';
+     	break;
+    case 'Quiznos':
+     	$logo = 'QuiznosSSS_oval.eps';
+     	break;
+    case 'Retreat':
+     	$logo = 'retreatlogocolor.gif';
+     	break;
+    case 'Tally':
+     	$logo = 'studentcentertally.gif';
+     	break;
+    case 'BookMark':
+     	$logo = 'bookmarklogo.gif';
+     	break;
+    case 'TomJohn':
+     	$logo = 'tomjohn.gif';
+     	break;
+    case 'WoodWorth':
+     	$logo = 'woodworthcommonslogo.gif';
+     	break;
+    case 'Burris':
+     	$logo = 'burrislogo.gif';
+     	break;
+}
+
+?> <img src = "<?php echo $logo ?>" alt = "test"/>
+	
+
 	<table width="40%"  border="1" >
     <div id="head_nav">
 	
 	<?php
-	$schedule_query = "SELECT * FROM schedule";
+	$schedule_query = "SELECT * FROM schedule ORDER BY Job ASC";
 	$result = mysqli_query($con, $schedule_query);
 	$new_row2 = array();
-		$query2 = sprintf("SELECT Job, Hours, Day, JobNumber FROM schedule WHERE StudentID = '%s'", $studentID);
+		$query2 = sprintf("SELECT Job, StartTime, EndTime, Day, JobNumber FROM schedule WHERE StudentID = '%s'", $studentID);
 		$schedule_result = mysqli_query($con, $query2);
 		while ($schedule_row = mysqli_fetch_assoc($schedule_result)){
 			$new_row2[$studentID][]= array('Job' => $schedule_row['Job'],
-								'Hours' => $schedule_row['Hours'],
+								'StartTime' => $schedule_row['StartTime'],
+								'EndTime' => $schedule_row['EndTime'],
 								'Day' => $schedule_row['Day'],
 								'JobNumber' => $schedule_row['JobNumber']);
 		}
      ?>
 	 
 	<?php foreach($new_row2 as $studentID => $rows):?>
-		<?php foreach($rows as $row): ?>
+			<?php foreach($rows as $row): ?>
 			<tr>
 				<td><?=$row['Job'];?></td>
-				<td><?=$row['Hours'];?></td>
+				<td><?=$row['StartTime'];?></td>
+				<td><?=$row['EndTime'];?></td>
 				<td><?=$row['Day'];?></td>
 				<td><form action="requestoff.php" method="POST"> <button name="JobNumber" class="btn btn-lg btn-primary"  type="submit" value ="<?php echo $row['JobNumber']?>">Request Shift off</button></form></td>
 				<br>

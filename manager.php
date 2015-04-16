@@ -59,6 +59,7 @@ $rowID = mysqli_fetch_array($queryID);
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="manager.php"target="_self">Home</a></li>
+			<li><a href="announcement.php" target="_self">Announcements</a></li>
 			<li><a href="openShifts.php" target="_self">Open Shifts</a></li>
 			<li><a href="weekendRequests.php" target="_self">View Weekend Requests</a></li>
 			<li><a href="ssSchedule.php" target="_self">Weekend Schedules</a></li>

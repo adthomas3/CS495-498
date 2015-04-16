@@ -24,11 +24,12 @@ $rowID = mysqli_fetch_array($queryID);
 	$result = mysqli_query($con, $schedule_query);
 	$new_row = array();
 		$studentID = $row['StudentID'];
-		$query = sprintf("SELECT Job, Hours, Day, JobNumber FROM schedule WHERE StudentID = '0'");
+		$query = sprintf("SELECT Job, StartTime, EndTime, Day, JobNumber FROM schedule WHERE StudentID = '0'");
 		$schedule_result = mysqli_query($con, $query);
 		while ($schedule_row = mysqli_fetch_assoc($schedule_result)){
 			$new_row[$studentID][]= array('Job' => $schedule_row['Job'],
-								'Hours' => $schedule_row['Hours'],
+								'StartTime' => $schedule_row['StartTime'],
+								'EndTime' => $schedule_row['EndTime'],
 								'Day' => $schedule_row['Day']);
 		}
      ?>
@@ -36,7 +37,8 @@ $rowID = mysqli_fetch_array($queryID);
 		<?php foreach($rows as $row): ?>
 			<tr>
 				<td><?=$row['Job'];?></td>
-				<td><?=$row['Hours'];?></td>
+				<td><?=$row['StartTime'];?></td>
+				<td><?=$row['EndTime'];?></td>
 				<td><?=$row['Day'];?></td>
 				<br>
 			</tr>
@@ -54,16 +56,18 @@ $rowID = mysqli_fetch_array($queryID);
 		$tempShift_result = mysqli_query($con, $query);
 		$row = mysqli_fetch_row($tempShift_result);
 		$test = $row[0];
+		
 	$info_query = "SELECT * FROM schedule";
 	$result = mysqli_query($con, $info_query);
 	$new_row = array();
-		$query = sprintf("SELECT Job, Hours, Day FROM schedule where JobNumber = $test");
+		$query = sprintf("SELECT Job, StartTime, EndTime Day FROM schedule where JobNumber = $test");
 		$info_result = mysqli_query($con, $query);
 		$row = mysqli_fetch_row($info_result);
 		
 		while ($schedule_row = mysqli_fetch_assoc($info_result)){
 			$new_row[$studentID][]= array('Job' => $schedule_row['Job'],
-								'Hours' => $schedule_row['Hours'],
+								'StartTime' => $schedule_row['StartTime'],
+								'EndTime' => $schedule_row['EndTime'],
 								'Day' => $schedule_row['Day']);
 		}
 		?>
@@ -71,7 +75,8 @@ $rowID = mysqli_fetch_array($queryID);
 		<?php foreach($rows as $row): ?>
 			<tr>
 				<td><?=$row['Job'];?></td>
-				<td><?=$row['Hours'];?></td>
+				<td><?=$row['StartTime'];?></td>
+				<td><?=$row['EndTime'];?></td>
 				<td><?=$row['Day'];?></td>
 				<br>
 			</tr>

@@ -56,8 +56,10 @@ $rowID = mysqli_fetch_array($queryID);
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="director.php"target="_self">Home</a></li>
-
-			<li><a href="createEmployee.html" target="_self">Create Employee</a></li>
+			<li><a href="announcement.php" target="_self">Announcements</a></li>
+			<li><a href="createEmployee.html" target="_self">Add Employee</a></li>
+			<li><a href="createEmployee.html" target="_self">Add Employee</a></li>
+			<li><a href="CreateJob.html" target="_self">Create Job</a></li>
 			<li><a href="removeEmployee.php" target="_self">Employee Information</a></li>
 
 			<li><a href=".php" target="_self">View Shift Records</a></li>
@@ -78,6 +80,65 @@ $rowID = mysqli_fetch_array($queryID);
 	<h2>Here are the schedules for every unit</h2>
 
 	<p> don't forget to pull image </p>
+
+
+	<table width="40%"  border="1" >
+    <div id="head_nav">
+
+      <?php
+	$schedule_query = "SELECT * FROM schedule";
+	$result = mysqli_query($con, $schedule_query);
+	$new_row = array();
+		$studentID = $rowID['StudentID']; 
+		$query = sprintf("SELECT Unit, Job, Hours, Day, JobNumber, StudentID FROM schedule ");
+		$schedule = mysqli_query($con, $query);
+		while ($schedule_row = mysqli_fetch_assoc($schedule)){
+			$new_row[$studentID][]= array('Unit' => $schedule_row['Unit'],
+								'Job' => $schedule_row['Job'],
+								'Hours' => $schedule_row['Hours'],
+								'Day' => $schedule_row['Day'],
+								'JobNumber' => $schedule_row['JobNumber'],
+								'StudentID' => $schedule_row['StudentID']);
+		}
+     ?>
+      <tr>
+        <td> Unit </td>
+        <td> Job </td>
+        <td> Hours </td>
+        <td> Day </td>
+        <td> Job Number </td>
+        <td> Student ID </td>
+      </tr>
+      <?php foreach($new_row as $studentID => $rows):?>
+      <?php foreach($rows as $row): ?>
+      <tr>
+        <td>
+          <?=$row['Unit'];?>
+        </td>
+        <td>
+          <?=$row['Job'];?>
+        </td>
+        <td>
+          <?=$row['Hours'];?>
+        </td>
+        <td>
+          <?=$row['Day'];?>
+        </td>
+        <td>
+          <?=$row['JobNumber'];?>
+        </td>
+        <td>
+          <?=$row['StudentID'];?>
+        </td>
+
+        <br>
+			</tr>
+      <?php endforeach;?>
+      <?php endforeach;?>
+
+    </div>
+      </table>
+
 
 
 </body>

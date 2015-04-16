@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Add Employee</title>
+    <title>Create Job</title>
 
     <!-- Bootstrap core CSS -->
     <link href="bootstrap-3.3.4/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -47,44 +47,48 @@
       </div>
     </nav>
 
-    <h3>Create New Employee</h3>
+    <h3>Create Job</h3>
 
-    <form method="POST" action="createEmployee.php">
+    <form method="POST" action="createJob.php">
         <fieldset>
-        <legend>Employee information:</legend>
+        <legend>Job information:</legend>
 
-        <input type="radio" name="employeeType" value="Student" >Employee 
+        <input type="radio" name="Day" value="Monday" >Monday 
+        
+        <input type="radio" name="Day" value="Tuesday" >Tuesday
+        
+        <input type="radio" name="Day" value="Wednesday" >Wednesday 
+        
+        <input type="radio" name="Day" value="Wednesday" >Wednesday 
+        
+        <input type="radio" name="Day" value="Thurday" >Thurday 
+        
+        <input type="radio" name="Day" value="Friday" >Friday 
+        
+        <input type="radio" name="Day" value="Saturday" >Saturday
+        
+        <input type="radio" name="Day" value="Sunday" >Sunday
         <br />
-         <input type="radio" name="employeeType" value="Manager" >Manager
-        <br /><br />
-        First name:<br />
-        <input type="text" name="firstName">
-        <br />
-        Last name:<br />
-        <input type="text" name="lastName">
-        <br>
-        Phone Number:<br />
-        <input type="text" name="phoneNumber" />
-        <br />
-        Address:<br />
-        <input type="text" name="address"  />
-        <br />
-        Email:<br />
-        <input type="text" name="email"  />
-        <br />
-        Password:<br />
-        <input type="text" name="password" />
-        <br />
-        Employee ID #:<br />
-        <input type="text" name="studentID" />
         <br />
         Unit:<br />
-        <input type="text" name="unit" />
+        <input type="text" name="Unit">
+        <br />
+        Job:<br />
+        <input type="text" name="Job">
+        <br>
+        Start Time:<br />
+        <input type="text" name="StartTime" />
+        <br />
+        End Time:<br />
+        <input type="text" name="EndTime"  />
+        <br />
+        Job Number:<br />
+        <input type="text" name="JobNumber" />
         <br /><br />
-        <button class="btn btn-lg btn-primary"  type="submit" value ="Submit" name ="submit">Create Employee</button>
-
+        <button class="btn btn-lg btn-primary"  type="submit" value ="Submit" name ="submit">Add Job</button>
+            <p>Job successfully added!</p>
         </fieldset>
         </form>
 
-</body>
+    </body>
 </html>
