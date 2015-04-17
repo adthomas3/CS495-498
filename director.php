@@ -9,8 +9,6 @@ $test = $_SESSION['Email'];
 $queryID = mysqli_query($con, "SELECT * FROM employee where Email = '$test'") or die(mysql_error());
 $rowID = mysqli_fetch_array($queryID);
 
-
-	
 	if($rowID['EmployeeType']!="Director") 
         { 
             header("Location: loginPage.html");
@@ -58,12 +56,9 @@ $rowID = mysqli_fetch_array($queryID);
             <li class="active"><a href="director.php"target="_self">Home</a></li>
 			<li><a href="announcement.php" target="_self">Announcements</a></li>
 			<li><a href="createEmployee.html" target="_self">Add Employee</a></li>
-			<li><a href="createEmployee.html" target="_self">Add Employee</a></li>
 			<li><a href="CreateJob.html" target="_self">Create Job</a></li>
 			<li><a href="removeEmployee.php" target="_self">Employee Information</a></li>
-
-			<li><a href=".php" target="_self">View Shift Records</a></li>
-
+			<li><a href="DirectorssSchedule.php" target="_self">Weekend Schedules</a></li>
             <li><a href="javascript:window.print()">Print</a></li>
 
           </ul>
@@ -82,14 +77,15 @@ $rowID = mysqli_fetch_array($queryID);
 
 		<table width="40%"  border="1" >
     <div id="head_nav">
-	
 	<?php
 	$schedule_query = "SELECT * FROM schedule ORDER BY Job ASC";
 	$result = mysqli_query($con, $schedule_query);
 	$new_row2 = array();
 		$studentID = $rowID['StudentID'];
 		$Unit = $rowID['Unit'];
-		$query2 = sprintf("SELECT Job, StartTime, EndTime, Day, JobNumber, Unit, FirstName, LastName FROM schedule ORDER BY CASE Day
+		$query2 = sprintf("SELECT Job, StartTime, EndTime, Day, JobNumber, Unit, FirstName, LastName FROM schedule 
+		WHERE(Day='Monday' OR Day='Tuesday' OR Day='Wednesday' OR Day='Thursday' OR Day='Friday') 
+		ORDER BY CASE Day
 					WHEN 'Sunday' THEN 1
 					WHEN 'Monday' THEN 2
 					WHEN 'Tuesday' THEN 3
@@ -117,8 +113,7 @@ $rowID = mysqli_fetch_array($queryID);
 				<td> Start Time </td>
 				<td> End Time </td>
 				<td> Day </td>
-				<td> First Name </td>
-				<td> Last Name </td>
+				<td> Name </td>
 	 
 	<?php foreach($new_row2 as $studentID => $rows):?>
 			<?php foreach($rows as $row): ?>
@@ -128,8 +123,7 @@ $rowID = mysqli_fetch_array($queryID);
 				<td><?=$row['StartTime'];?></td>
 				<td><?=$row['EndTime'];?></td>
 				<td><?=$row['Day'];?></td>
-				<td><?=$row['FirstName'];?></td>
-				<td><?=$row['LastName'];?></td>
+				<td><?=$row['FirstName'];?><br><?=$row['LastName'];?></td>
 				<br>
 			</tr>
 		<?php endforeach;?>
@@ -137,8 +131,6 @@ $rowID = mysqli_fetch_array($queryID);
       
 
     </div>
-
-
 
 </body>
 </html>

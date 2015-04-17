@@ -8,17 +8,12 @@ $con = mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME) or die("Failed to con
 $test = $_SESSION['Email'];
 $queryID = mysqli_query($con, "SELECT * FROM employee where Email = '$test'") or die(mysql_error());
 $rowID = mysqli_fetch_array($queryID);
-
-
 	
 	if($rowID['EmployeeType']!="Manager") 
         { 
             header("Location: loginPage.html");
 			}      
 ?>
-
-
-
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -61,7 +56,7 @@ $rowID = mysqli_fetch_array($queryID);
             <li class="active"><a href="manager.php"target="_self">Home</a></li>
 			<li><a href="announcement.php" target="_self">Announcements</a></li>
 			<li><a href="allRequests.php" target="_self">Requests</a></li>
-			<li><a href="ssSchedule.php" target="_self">Weekend Schedules</a></li>
+			<li><a href="ManagerssSchedule.php" target="_self">Weekend Schedules</a></li>
 			<li><a href="javascript:window.print()">Print</a></li>
           </ul>
          

@@ -60,7 +60,7 @@ $rowID = mysqli_fetch_array($queryID);
           <ul class="nav navbar-nav">
             <li class="active"><a href="student.php"target="_self">Home</a></li>
             <li><a href="openShifts.php" target="_self">Open Shifts</a></li>
-			<li><a href="ssSchedule.php" target="_self">Weekend Schedule</a></li>
+			<li><a href="StudentssSchedule.php" target="_self">Weekend Schedule</a></li>
 			<li><a href="javascript:window.print()">Print</a></li>
           </ul>
          
@@ -110,7 +110,6 @@ $rowID = mysqli_fetch_array($queryID);
     <h2>Here is the schedule for your unit:</h2>
 
 	<?php
-    
     $Unit_query = "SELECT Unit FROM employee WHERE Email = '$test'";
    	 $Unit_result = mysqli_query($con, $Unit_query);
    	 $row = mysqli_fetch_row($Unit_result);
@@ -159,23 +158,34 @@ switch ($Unit_employee) {
     <div id="head_nav">
 	
 	<?php
-	$schedule_query = "SELECT * FROM schedule ORDER BY Job ASC";
+	$schedule_query = "SELECT * FROM schedule ORDER BY Job ASC WHERE studentID = $studentID";
 	$result = mysqli_query($con, $schedule_query);
 	$new_row2 = array();
-		$query2 = sprintf("SELECT Job, StartTime, EndTime, Day, JobNumber FROM schedule WHERE StudentID = '%s'", $studentID);
+		$studentID = $rowID['StudentID'];
+		$Unit = $rowID['Unit'];
+		$query2 = sprintf("SELECT Job, StartTime, EndTime, Day, JobNumber, Unit, FirstName, LastName FROM schedule WHERE Unit = '%s'
+					AND (Day='Monday' OR Day='Tuesday' OR Day='Wednesday' OR Day='Thursday' OR Day='Friday')", $Unit);
 		$schedule_result = mysqli_query($con, $query2);
 		while ($schedule_row = mysqli_fetch_assoc($schedule_result)){
 			$new_row2[$studentID][]= array('Job' => $schedule_row['Job'],
 								'StartTime' => $schedule_row['StartTime'],
 								'EndTime' => $schedule_row['EndTime'],
 								'Day' => $schedule_row['Day'],
-								'JobNumber' => $schedule_row['JobNumber']);
+								'JobNumber' => $schedule_row['JobNumber'],
+								'Unit' => $schedule_row['Unit'],);
 		}
      ?>
+			<tr> 
+				<td> Unit </td>
+				<td> Job </td>
+				<td> Start Time </td>
+				<td> End Time </td>
+				<td> Day </td>
 	 
 	<?php foreach($new_row2 as $studentID => $rows):?>
 			<?php foreach($rows as $row): ?>
 			<tr>
+				<td><?=$row['Unit'];?></td>
 				<td><?=$row['Job'];?></td>
 				<td><?=$row['StartTime'];?></td>
 				<td><?=$row['EndTime'];?></td>
@@ -188,6 +198,7 @@ switch ($Unit_employee) {
       
 
     </div>
+
 </table>
 </body>
 </html>

@@ -38,7 +38,7 @@ $rowID = mysqli_fetch_array($queryID);
     <link href="bootstrap-3.3.4/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="customAndExampleBootstrap/signin.css" rel="stylesheet">
+    <link href="customAndExampleBootstrap/navbar-fixed-top.css" rel="stylesheet">
     <link href="customAndExampleBootstrap/customSchedules.css" rel="stylesheet">
 
     <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
@@ -64,14 +64,9 @@ $rowID = mysqli_fetch_array($queryID);
 
           </ul>
          
-		  <ul class="nav navbar-nav navbar-right">
-            <li class="active"> </li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
     </nav>
 
-
+	<h2>Employee Records</h2>
 	
 	<table width="40%"  border="1" >
     <div id="head_nav">
