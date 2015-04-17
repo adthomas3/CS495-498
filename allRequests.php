@@ -13,7 +13,7 @@ $row = mysqli_fetch_array($query);
 
 $queryID = mysqli_query($con, "SELECT * FROM employee where Email = '$test'") or die(mysql_error());
 $rowID = mysqli_fetch_array($queryID);	
-	if($rowID['EmployeeType']!="Student") 
+	if($rowID['EmployeeType']!="Manager") 
         { 
             header("Location: loginPage.html");
 			}      
@@ -53,7 +53,7 @@ $rowID = mysqli_fetch_array($queryID);
 	$schedule_query = "SELECT * FROM requests";
 	$result = mysqli_query($con, $schedule_query);
 	$new_row = array();
-		$query = sprintf("Select JobNumber FROM requests WHERE StudentID1 NOT IN ($studentID) AND StudentID2 = '0'");
+		$query = sprintf("Select JobNumber FROM requests WHERE StudentID2 NOT IN (0)");
 		$schedule_result = mysqli_query($con, $query);
 		while ($schedule_row = mysqli_fetch_assoc($schedule_result)){
 			$new_row[$studentID][]= array('JobNumber' => $schedule_row['JobNumber']);
@@ -63,7 +63,8 @@ $rowID = mysqli_fetch_array($queryID);
 		<?php foreach($rows as $row): ?>
 			<tr>
 				<td><?=$row['JobNumber'];?></td>
-				<td><form action="requestToCover.php" method="POST"> <button name="JobNumber" class="btn btn-lg btn-primary"  type="submit" value ="<?php echo $row['JobNumber']?>">Request Shift</button></form></td>
+				<td><form action="" method="POST"> <button name="Approve" class="btn btn-lg btn-primary"  type="submit" value ="">Approve</button></form></td>
+				<td><form action="" method="POST"> <button name="Decline" class="btn btn-lg btn-primary"  type="submit" value ="">Decline</button></form></td>
 				<br>
 			</tr>
 		<?php endforeach;?>

@@ -15,18 +15,7 @@ $studentID = $row['StudentID'];
 
 $JobNumber = $_POST['JobNumber'];
 
-
-$ScheduleQuery = sprintf("SELECT Unit, Job, StartTime, EndTime, Day FROM schedule Where JobNumber = '%s'", $JobNumber);
-$QueryResult = mysqli_query($con, $ScheduleQuery);
-$row2 = mysqli_fetch_array($QueryResult);
-$Unit = $row2['Unit'];
-$Job = $row2['Job'];
-$StartTime = $row2['StartTime'];
-$EndTime = $row2['EndTime'];
-$Day = $row2['Day'];
-
-$sql = "INSERT INTO requests (StudentID1,StudentID2,JobNumber,RequestType,Unit,Job,StartTime,EndTime,Day)
-   	 VALUES($studentID,0,$JobNumber,'Trade','$Unit','$StartTime', '$Job', '$EndTime','$Day')";
+$sql = "UPDATE requests SET StudentID2=$studentID where JobNumber = $JobNumber";
 
 if ($con->query($sql) === TRUE) {
     echo "Request Sent";
@@ -35,4 +24,6 @@ if ($con->query($sql) === TRUE) {
 }
 
 $con->close();
+
+header("Location: openShifts.php");
 ?>

@@ -79,65 +79,64 @@ $rowID = mysqli_fetch_array($queryID);
 
 	<h2>Here are the schedules for every unit</h2>
 
-	<p> don't forget to pull image </p>
 
-
-	<table width="40%"  border="1" >
+		<table width="40%"  border="1" >
     <div id="head_nav">
-
-      <?php
-	$schedule_query = "SELECT * FROM schedule";
+	
+	<?php
+	$schedule_query = "SELECT * FROM schedule ORDER BY Job ASC";
 	$result = mysqli_query($con, $schedule_query);
-	$new_row = array();
-		$studentID = $rowID['StudentID']; 
-		$query = sprintf("SELECT Unit, Job, Hours, Day, JobNumber, StudentID FROM schedule ");
-		$schedule = mysqli_query($con, $query);
-		while ($schedule_row = mysqli_fetch_assoc($schedule)){
-			$new_row[$studentID][]= array('Unit' => $schedule_row['Unit'],
-								'Job' => $schedule_row['Job'],
-								'Hours' => $schedule_row['Hours'],
+	$new_row2 = array();
+		$studentID = $rowID['StudentID'];
+		$Unit = $rowID['Unit'];
+		$query2 = sprintf("SELECT Job, StartTime, EndTime, Day, JobNumber, Unit, FirstName, LastName FROM schedule ORDER BY CASE Day
+					WHEN 'Sunday' THEN 1
+					WHEN 'Monday' THEN 2
+					WHEN 'Tuesday' THEN 3
+					WHEN 'Wednesday' THEN 4
+					WHEN 'Thursday' THEN 5
+					WHEN 'Friday' THEN 6
+					WHEN 'Saturday' THEN 7
+					ELSE NULL
+					END ASC, StartTime ASC");
+		$schedule_result = mysqli_query($con, $query2);
+		while ($schedule_row = mysqli_fetch_assoc($schedule_result)){
+			$new_row2[$studentID][]= array('Job' => $schedule_row['Job'],
+								'StartTime' => $schedule_row['StartTime'],
+								'EndTime' => $schedule_row['EndTime'],
 								'Day' => $schedule_row['Day'],
 								'JobNumber' => $schedule_row['JobNumber'],
-								'StudentID' => $schedule_row['StudentID']);
+								'Unit' => $schedule_row['Unit'],
+								'FirstName' => $schedule_row['FirstName'],
+								'LastName' => $schedule_row['LastName']);
 		}
      ?>
-      <tr>
-        <td> Unit </td>
-        <td> Job </td>
-        <td> Hours </td>
-        <td> Day </td>
-        <td> Job Number </td>
-        <td> Student ID </td>
-      </tr>
-      <?php foreach($new_row as $studentID => $rows):?>
-      <?php foreach($rows as $row): ?>
-      <tr>
-        <td>
-          <?=$row['Unit'];?>
-        </td>
-        <td>
-          <?=$row['Job'];?>
-        </td>
-        <td>
-          <?=$row['Hours'];?>
-        </td>
-        <td>
-          <?=$row['Day'];?>
-        </td>
-        <td>
-          <?=$row['JobNumber'];?>
-        </td>
-        <td>
-          <?=$row['StudentID'];?>
-        </td>
-
-        <br>
+			<tr> 
+				<td> Unit </td>
+				<td> Job </td>
+				<td> Start Time </td>
+				<td> End Time </td>
+				<td> Day </td>
+				<td> First Name </td>
+				<td> Last Name </td>
+	 
+	<?php foreach($new_row2 as $studentID => $rows):?>
+			<?php foreach($rows as $row): ?>
+			<tr>
+				<td><?=$row['Unit'];?></td>
+				<td><?=$row['Job'];?></td>
+				<td><?=$row['StartTime'];?></td>
+				<td><?=$row['EndTime'];?></td>
+				<td><?=$row['Day'];?></td>
+				<td><?=$row['FirstName'];?></td>
+				<td><?=$row['LastName'];?></td>
+				<br>
 			</tr>
-      <?php endforeach;?>
-      <?php endforeach;?>
+		<?php endforeach;?>
+	<?php endforeach;?>
+      
 
     </div>
-      </table>
 
 
 

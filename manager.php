@@ -60,8 +60,7 @@ $rowID = mysqli_fetch_array($queryID);
           <ul class="nav navbar-nav">
             <li class="active"><a href="manager.php"target="_self">Home</a></li>
 			<li><a href="announcement.php" target="_self">Announcements</a></li>
-			<li><a href="openShifts.php" target="_self">Open Shifts</a></li>
-			<li><a href="weekendRequests.php" target="_self">View Weekend Requests</a></li>
+			<li><a href="allRequests.php" target="_self">Requests</a></li>
 			<li><a href="ssSchedule.php" target="_self">Weekend Schedules</a></li>
 			<li><a href="javascript:window.print()">Print</a></li>
           </ul>
@@ -74,7 +73,99 @@ $rowID = mysqli_fetch_array($queryID);
     </nav>
 				
     <h2>Here is the Monday-Friday schedeule for your unit:</h2>
-	<p> pull image </p>
+<?php
+    
+    $Unit_query = "SELECT Unit FROM employee WHERE Email = '$test'";
+        $Unit_result = mysqli_query($con, $Unit_query);
+        $row = mysqli_fetch_row($Unit_result);
+        $Unit_employee = $row[0];
+    
+switch ($Unit_employee) {
+   case 'Atrium':
+         $logo = 'images/atriumlogo.gif';
+         break;
+   case 'Elliot':
+         $logo = 'images/elliott.gif';
+         break;
+   case 'LaFollette':
+         $logo = 'images/lafollettelogo.gif';
+         break;
+    case 'Noyer':
+         $logo = 'images/noyerlogocolor.gif';
+         break;
+    case 'Quiznos':
+         $logo = 'QuiznosSSS_oval.eps';
+         break;
+    case 'Retreat':
+         $logo = 'retreatlogocolor.gif';
+         break;
+    case 'Tally':
+         $logo = 'studentcentertally.gif';
+         break;
+    case 'BookMark':
+         $logo = 'bookmarklogo.gif';
+         break;
+    case 'TomJohn':
+         $logo = 'tomjohn.gif';
+         break;
+    case 'WoodWorth':
+         $logo = 'woodworthcommonslogo.gif';
+         break;
+    case 'Burris':
+         $logo = 'burrislogo.gif';
+         break;
+}
+
+?> <img src = "<?php echo $logo ?>" alt = "test"/>	
+		<table width="40%"  border="1" >
+    <div id="head_nav">
+	
+	<?php
+	$schedule_query = "SELECT * FROM schedule ORDER BY Job ASC";
+	$result = mysqli_query($con, $schedule_query);
+	$new_row2 = array();
+		$studentID = $rowID['StudentID'];
+		$Unit = $rowID['Unit'];
+		$query2 = sprintf("SELECT Job, StartTime, EndTime, Day, JobNumber, Unit, FirstName, LastName FROM schedule WHERE Unit = '%s'
+					AND (Day='Monday' OR Day='Tuesday' OR Day='Wednesday' OR Day='Thursday' OR Day='Friday')", $Unit);
+		$schedule_result = mysqli_query($con, $query2);
+		while ($schedule_row = mysqli_fetch_assoc($schedule_result)){
+			$new_row2[$studentID][]= array('Job' => $schedule_row['Job'],
+								'StartTime' => $schedule_row['StartTime'],
+								'EndTime' => $schedule_row['EndTime'],
+								'Day' => $schedule_row['Day'],
+								'JobNumber' => $schedule_row['JobNumber'],
+								'Unit' => $schedule_row['Unit'],
+								'FirstName' => $schedule_row['FirstName'],
+								'LastName' => $schedule_row['LastName']);
+		}
+     ?>
+			<tr> 
+				<td> Unit </td>
+				<td> Job </td>
+				<td> Start Time </td>
+				<td> End Time </td>
+				<td> Day </td>
+				<td> First Name </td>
+				<td> Last Name </td>
+	 
+	<?php foreach($new_row2 as $studentID => $rows):?>
+			<?php foreach($rows as $row): ?>
+			<tr>
+				<td><?=$row['Unit'];?></td>
+				<td><?=$row['Job'];?></td>
+				<td><?=$row['StartTime'];?></td>
+				<td><?=$row['EndTime'];?></td>
+				<td><?=$row['Day'];?></td>
+				<td><?=$row['FirstName'];?></td>
+				<td><?=$row['LastName'];?></td>
+				<br>
+			</tr>
+		<?php endforeach;?>
+	<?php endforeach;?>
+      
+
+    </div>
 
 </body>
 </html>

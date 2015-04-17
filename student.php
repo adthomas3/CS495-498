@@ -78,8 +78,6 @@ $rowID = mysqli_fetch_array($queryID);
     <div id="head_nav">
 	
 	<?php 
-	
-	
 	$announcements_query = "SELECT * FROM announcements";
 	$result = mysqli_query($con, $announcements_query);
 	$new_row = array();
