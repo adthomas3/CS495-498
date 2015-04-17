@@ -20,7 +20,8 @@ function SignIn()
         
         if(!empty($row['Email']) AND !empty($row['Pass'])) 
         { 
-            $_SESSION['Email'] = $row['Email']; 
+            $_SESSION['Email'] = $row['Email'];
+            $_SESSION['StudentID'] = $row['StudentID'];
 			
             if($row['EmployeeType'] == "Student"){
 					header("Location: student.php");

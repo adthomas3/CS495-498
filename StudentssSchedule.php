@@ -17,10 +17,30 @@ $rowID = mysqli_fetch_array($queryID);
 ?>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8" />
-    <!--<link type="text/css" rel="stylesheet" href="stylesheet.css" /> -->
-    <title>Welcome!</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Weekend Schedule</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap-3.3.4/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="customAndExampleBootstrap/navbar-fixed-top.css" rel="stylesheet">
+	<link href="customAndExampleBootstrap/customSchedules.css" rel="stylesheet">
+
+    <!--<script src="../../assets/js/ie-emulation-modes-warning.js"></script> -->
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body>
     <script src="http://code.jquery.com/jquery.js"></script>
@@ -30,13 +50,17 @@ $rowID = mysqli_fetch_array($queryID);
          <!-- Options will vary based on employee type.... or create separate html pages for respective users... not real sure yet... may have to redo everything 
              student will have to make requests --> 
             
-            <li><a href="student.php" target="_self">Home</a></li>
-            <li><a href="#">Requests</a>
-                <ul>
-                    <li><a href="javascript:window.print()">
-                        Print Current Schedule(s)</a></li>
-                    <li><a href="" target="_self">
-                        View Shift Requests</a></li> 
+     <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="student.php"target="_self">Home</a></li>
+     
+			<li><a href="javascript:window.print()">Print</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav> 
         <!-- If director, show all units -->      
     <h2>Here is the Saturday/Sunday schedeule</h2>
 

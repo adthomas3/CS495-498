@@ -26,7 +26,7 @@ $rowID = mysqli_fetch_array($queryID);
 
     if(mysqli_query($con, $insert))
 	{
-        echo "Announcement Sent";
+       header("Location: announcement.php");
     }
 	else
 	{
@@ -41,7 +41,6 @@ $rowID = mysqli_fetch_array($queryID);
 ?>
 	
 	<form action="<?php echo $Employeetype ?>.php" method="POST">
-	<input type="submit" value="Go back to home page">
 	</form>
 <?php
 	$con->close();

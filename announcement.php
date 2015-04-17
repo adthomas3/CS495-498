@@ -31,7 +31,7 @@ $row = mysqli_fetch_array($queryID);
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <head>
-     <meta charset="utf-8">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
@@ -99,13 +99,13 @@ $row = mysqli_fetch_array($queryID);
         <br>
         Date(as m/d/y):<br>
         <input type="text" name="Date">
-        <br>
-        
-        
-        <input type="submit" name ="submit" value="Submit"></fieldset>
+        <br />
+        <br />
+         <button class="btn btn-lg btn-primary"  type="submit" value ="Submit" name ="submit">Add Announcement</button>
+        </fieldset>
         </form>
-		
-		<h2>Announcements</h2>
+		<br />
+		<h4>Announcements</h4>
 	
 	<table width="40%"  border="1"  >
     <div id="head_nav">
@@ -142,7 +142,7 @@ $row = mysqli_fetch_array($queryID);
 				<td><?=$row['Unit'];?></td>
 				<td><?=$row['Date'];?></td>
 				<td><?=$row['Announcement'];?></td>
-				<td><form action="deleteAnnouncement.php" method="POST"> <button name = "AnnouncementDeleted" type="submit" value="<?php echo $row['Announcement']?>">Delete Announcement</button></form></td>
+				<td><form action="deleteAnnouncement.php" method="POST"> <button class="btn btn-lg btn-primary" name = "AnnouncementDeleted" type="submit" value="<?php echo $row['Announcement']?>">Delete Announcement</button></form></td>
 				<br>
 			</tr>
 		<?php endforeach;?>
