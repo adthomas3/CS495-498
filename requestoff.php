@@ -30,6 +30,7 @@ $sql = "INSERT INTO requests (StudentID1,StudentID2,JobNumber,RequestType,Unit,J
 
 if ($con->query($sql) === TRUE) {
     echo "Request Sent";
+	header("Location: student.php");
 } else {
     echo "Error: " . $sql . "<br>" . $con->error;
 }

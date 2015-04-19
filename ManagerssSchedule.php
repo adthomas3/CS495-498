@@ -83,7 +83,7 @@ $rowID = mysqli_fetch_array($queryID);
 		$studentID = $rowID['StudentID'];
 		$Unit = $rowID['Unit'];
 		$query2 = sprintf("SELECT Job, StartTime, EndTime, Day, JobNumber, Unit, FirstName, LastName FROM schedule WHERE
-					Day='Saturday' OR Day='Sunday'");
+					Day='Saturday' OR Day='Sunday' AND Unit = '$Unit'");
 		$schedule_result = mysqli_query($con, $query2);
 		while ($schedule_row = mysqli_fetch_assoc($schedule_result)){
 			$new_row2[$studentID][]= array('Job' => $schedule_row['Job'],
@@ -115,12 +115,20 @@ $rowID = mysqli_fetch_array($queryID);
 				<td><?=$row['Day'];?></td>
 				<td><?=$row['FirstName'];?></td>
 				<td><?=$row['LastName'];?></td>
-				<br>
 			</tr>
 		<?php endforeach;?>
 	<?php endforeach;?>
       
 
     </div>
+
+
+	<p><?php
+    $dt = DateTime::createFromFormat('Y-m-d', date('Y-m-d'));
+    $dt->setTimeZone(new DateTimeZone('America/Indiana/Indianapolis'));
+    die($dt->format('M d Y g:i:s a'));
+    ?></p>
+
+
 </body>
 </html>

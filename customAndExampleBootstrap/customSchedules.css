@@ -1,5 +1,5 @@
     table   
-    {padding: 0px;}
+    { padding: 0px; }
 
     th,td
     { margin: 0; text-align: center; border-collapse: collapse; outline: 1px solid #e3e3e3; border: 3px solid black; border-color: black; }
@@ -9,7 +9,7 @@
 
     body
     { background-image: url("../images/ballState20O.png"); background-size: 100% 137%; background-repeat: no-repeat; 
-      background-attachment: fixed; padding-left: 60px; }
+      background-attachment: fixed; padding-left: 70px; }
     
     .btn
     { color: white; background-color: #D11919; border-color: black; }
@@ -31,3 +31,6 @@
     .navbar-default .navbar-nav > .active > a:hover, 
     .navbar-default .navbar-nav > .active > a:focus 
     { color: black; background-color: white; }
+
+    p
+    { position: fixed; bottom: 0; width:90%; text-align: right; font-weight: bolder; }

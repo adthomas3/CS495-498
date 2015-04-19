@@ -33,15 +33,8 @@ $rowID = mysqli_fetch_array($queryID);
 		echo "Error: " . $insert . "<br>" . mysqli_error($con);
 	}
 	
-	if($rowID['EmployeeType'] == 'Manager'){
-		$Employeetype = 'manager';
-		header("Location: announcement.php");}
-	else if ($rowID['EmployeeType'] == 'Director'){
-		$Employeetype = 'director';}
+
 ?>
-	
-	<form action="<?php echo $Employeetype ?>.php" method="POST">
-	</form>
 <?php
 	$con->close();
 

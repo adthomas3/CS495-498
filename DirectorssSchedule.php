@@ -132,12 +132,19 @@ $rowID = mysqli_fetch_array($queryID);
             <td>
               <?=$row['LastName'];?>
             </td>
-            <br>
 			</tr>
           <?php endforeach;?>
           <?php endforeach;?>
 
 
         </div>
+
+	<p><?php
+    $dt = DateTime::createFromFormat('Y-m-d', date('Y-m-d'));
+    $dt->setTimeZone(new DateTimeZone('America/Indiana/Indianapolis'));
+    die($dt->format('M d Y g:i:s a'));
+    ?></p>
+
+
     </body>
   </html>

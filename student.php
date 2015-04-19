@@ -129,25 +129,25 @@ switch ($Unit_employee) {
      	$logo = 'images/noyerlogocolor.gif';
      	break;
     case 'Quiznos':
-     	$logo = 'QuiznosSSS_oval.eps';
+     	$logo = 'images/QuiznosSSS_oval.eps';
      	break;
     case 'Retreat':
-     	$logo = 'retreatlogocolor.gif';
+     	$logo = 'images/retreatlogocolor.gif';
      	break;
     case 'Tally':
-     	$logo = 'studentcentertally.gif';
+     	$logo = 'images/studentcentertally.gif';
      	break;
     case 'BookMark':
-     	$logo = 'bookmarklogo.gif';
+     	$logo = 'images/bookmarklogo.gif';
      	break;
     case 'TomJohn':
-     	$logo = 'tomjohn.gif';
+     	$logo = 'images/tomjohn.gif';
      	break;
     case 'WoodWorth':
-     	$logo = 'woodworthcommonslogo.gif';
+     	$logo = 'images/woodworthcommonslogo.gif';
      	break;
     case 'Burris':
-     	$logo = 'burrislogo.gif';
+     	$logo = 'images/burrislogo.gif';
      	break;
 }
 
@@ -190,8 +190,17 @@ switch ($Unit_employee) {
 				<td><?=$row['StartTime'];?></td>
 				<td><?=$row['EndTime'];?></td>
 				<td><?=$row['Day'];?></td>
-				<td><form action="requestoff.php" method="POST"> <button name="JobNumber" class="btn btn-lg btn-primary"  type="submit" value ="<?php echo $row['JobNumber']?>">Request Shift off</button></form></td>
-				<br>
+				<td><?php
+					$alreadyAskedOff = sprintf("SELECT JobNumber FROM requests WHERE JobNumber = '%s'", $row['JobNumber']);
+					$schedule_result = mysqli_query($con, $alreadyAskedOff);
+					$row2 = mysqli_fetch_row($schedule_result);
+					$JobNumberRequested = $row2[0];
+				if(!$JobNumberRequested):
+				?><form action="requestoff.php" method="POST"> <button name="JobNumber" class="btn btn-lg btn-primary"  type="submit" 
+						value ="<?php echo $row['JobNumber']?>">Request Shift off</button></form><?php 
+				else:
+				echo 'You already asked this shift off';
+				endif ?></td>
 			</tr>
 		<?php endforeach;?>
 	<?php endforeach;?>
@@ -200,5 +209,15 @@ switch ($Unit_employee) {
     </div>
 
 </table>
+
+
+
+	<p><?php
+    $dt = DateTime::createFromFormat('Y-m-d', date('Y-m-d'));
+    $dt->setTimeZone(new DateTimeZone('America/Indiana/Indianapolis'));
+    die($dt->format('M d Y g:i:s a'));
+    ?></p>
+
+
 </body>
 </html>

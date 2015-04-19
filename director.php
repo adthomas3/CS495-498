@@ -59,6 +59,7 @@ $rowID = mysqli_fetch_array($queryID);
 			<li><a href="CreateJob.html" target="_self">Create Job</a></li>
 			<li><a href="removeEmployee.php" target="_self">Employee Information</a></li>
 			<li><a href="DirectorssSchedule.php" target="_self">Weekend Schedules</a></li>
+			<li><a href="Backup.php" target="_self">Backups</a></li>
             <li><a href="javascript:window.print()">Print</a></li>
 
           </ul>
@@ -83,7 +84,7 @@ $rowID = mysqli_fetch_array($queryID);
 	$new_row2 = array();
 		$studentID = $rowID['StudentID'];
 		$Unit = $rowID['Unit'];
-		$query2 = sprintf("SELECT Job, StartTime, EndTime, Day, JobNumber, Unit, FirstName, LastName FROM schedule 
+		$query2 = sprintf("SELECT Job, StartTime, EndTime, Day, JobNumber, Unit, FirstName, LastName,StudentID FROM schedule 
 		WHERE(Day='Monday' OR Day='Tuesday' OR Day='Wednesday' OR Day='Thursday' OR Day='Friday') 
 		ORDER BY CASE Day
 					WHEN 'Sunday' THEN 1
@@ -104,7 +105,8 @@ $rowID = mysqli_fetch_array($queryID);
 								'JobNumber' => $schedule_row['JobNumber'],
 								'Unit' => $schedule_row['Unit'],
 								'FirstName' => $schedule_row['FirstName'],
-								'LastName' => $schedule_row['LastName']);
+								'LastName' => $schedule_row['LastName'],
+								'StudentID' => $schedule_row['StudentID']);
 		}
      ?>
 			<tr> 
@@ -124,13 +126,256 @@ $rowID = mysqli_fetch_array($queryID);
 				<td><?=$row['EndTime'];?></td>
 				<td><?=$row['Day'];?></td>
 				<td><?=$row['FirstName'];?><br><?=$row['LastName'];?></td>
-				<br>
+				<td><?php 
+				if($row['StudentID']==0):
+						?><form method="POST" action="giveShift.php">
+						Input Student ID of the student you wish to have this shift:<br />
+						<input type="text" name="StudentIDgiven"></input>
+						<button class="btn btn-lg btn-primary"  type="submit" value ="<?php echo $row['JobNumber']?>" name ="JobNumber">Give Shift</button></form><?php 
+					else:
+						?><form method="POST" action="removeShift.php">
+						<button class="btn btn-lg btn-primary"  type="submit" value ="<?php echo $row['JobNumber']?>" name ="JobNumber">Remove shift from student</button></form><?php
+					endif;
+					?></td>
 			</tr>
 		<?php endforeach;?>
 	<?php endforeach;?>
       
 
     </div>
+
+
+	<p><?php
+    $dt = DateTime::createFromFormat('Y-m-d', date('Y-m-d'));
+    $dt->setTimeZone(new DateTimeZone('America/Indiana/Indianapolis'));
+    die($dt->format('M d Y g:i:s a'));
+    ?></p>
+
+
+
+
+	<?php 
+$Date= date('m');
+
+$f = fopen("01BackupCount.txt", "r");
+$DCount1= fgets($f);
+fclose($f);
+
+$f = fopen("02BackupCount.txt", "r");
+$DCount2= fgets($f);
+fclose($f);
+
+$f = fopen("03BackupCount.txt", "r");
+$DCount3= fgets($f);
+fclose($f);
+
+$f = fopen("04BackupCount.txt", "r");
+$DCount4= fgets($f);
+fclose($f);
+
+$f = fopen("05BackupCount.txt", "r");
+$DCount5= fgets($f);
+fclose($f);
+
+$f = fopen("06BackupCount.txt", "r");
+$DCount6= fgets($f);
+fclose($f);
+
+$f = fopen("07BackupCount.txt", "r");
+$DCount7= fgets($f);
+fclose($f);
+
+$f = fopen("08BackupCount.txt", "r");
+$DCount8= fgets($f);
+fclose($f);
+
+$f = fopen("09BackupCount.txt", "r");
+$DCount9= fgets($f);
+fclose($f);
+
+$f = fopen("10BackupCount.txt", "r");
+$DCount10= fgets($f);
+fclose($f);
+
+$f = fopen("11BackupCount.txt", "r");
+$DCount11= fgets($f);
+fclose($f);
+
+$f = fopen("12BackupCount.txt", "r");
+$DCount12= fgets($f);
+fclose($f);
+
+
+ if($Date == '01'){ 
+	 if ( $DCount1 == '0'){
+	 unlink('C:\wamp\www\file02.txt');
+	 $f = fopen("01BackupCount.txt", "w");
+$txt = "1";
+fwrite($f, $txt);
+fclose($f);
+	 $f = fopen("02BackupCount.txt", "w");
+$txt = "0";
+fwrite($f, $txt);
+fclose($f);;
+	 }
+ }
+ 
+ else if  ($Date == '02'){
+	 if ( $DCount2 == '0'){
+	 unlink('C:\wamp\www\file03.txt');
+	 $f = fopen("02BackupCount.txt", "w");
+$txt = "1";
+fwrite($f, $txt);
+fclose($f);
+	 $f = fopen("03BackupCount.txt", "w");
+$txt = "0";
+fwrite($f, $txt);
+fclose($f);
+	 }
+ }
+ 
+	 else if  ($Date == '03'){
+	 if ( $DCount3 == '0'){
+	 unlink('C:\wamp\www\file04.txt');
+	 $f = fopen("03BackupCount.txt", "w");
+$txt = "1";
+fwrite($f, $txt);
+fclose($f);
+	 $f = fopen("04BackupCount.txt", "w");
+$txt = "0";
+fwrite($f, $txt);
+fclose($f);
+	 }
+	 }
+	 
+	 else if  ($Date == '04'){
+	 if ( $DCount4 == '0'){
+	 unlink('C:\wamp\www\file05.txt');
+	 $f = fopen("04BackupCount.txt", "w");
+$txt = "1";
+fwrite($f, $txt);
+fclose($f);
+	 $f = fopen("05BackupCount.txt", "w");
+$txt = "0";
+fwrite($f, $txt);
+fclose($f);
+	 }
+	 }
+	 
+	 else if  ($Date == '05'){
+	 if ( $DCount5 == '0'){
+	 unlink('C:\wamp\www\file06.txt');
+	 $f = fopen("05BackupCount.txt", "w");
+$txt = "1";
+fwrite($f, $txt);
+fclose($f);
+	 $f = fopen("06BackupCount.txt", "w");
+$txt = "0";
+fwrite($f, $txt);
+fclose($f);
+	 }
+	 }
+	 
+	 else if  ($Date == '06'){
+	 if ( $DCount6 == '0'){
+	 unlink('C:\wamp\www\file07.txt');
+	 $f = fopen("06BackupCount.txt", "w");
+$txt = "1";
+fwrite($f, $txt);
+fclose($f);
+	 $f = fopen("07BackupCount.txt", "w");
+$txt = "0";
+fwrite($f, $txt);
+fclose($f);
+	 }
+	 }
+	 
+	 else if  ($Date == '07'){
+	 if ( $DCount7 == '0'){
+	 unlink('C:\wamp\www\file08.txt');
+	 $f = fopen("07BackupCount.txt", "w");
+$txt = "1";
+fwrite($f, $txt);
+fclose($f);
+	 $f = fopen("08BackupCount.txt", "w");
+$txt = "0";
+fwrite($f, $txt);
+fclose($f);
+	 }
+	 }
+	 
+	 else if  ($Date == '08'){
+	 if ( $DCount8 == '0'){
+	 unlink('C:\wamp\www\file09.txt');
+	 $f = fopen("08BackupCount.txt", "w");
+$txt = "1";
+fwrite($f, $txt);
+fclose($f);
+	 $f = fopen("09BackupCount.txt", "w");
+$txt = "0";
+fwrite($f, $txt);
+fclose($f);
+	 }
+	 }
+	 
+	 else if  ($Date == '09'){
+	 if ( $DCount9 == '0'){
+	 unlink('C:\wamp\www\file10.txt');
+	 $f = fopen("09BackupCount.txt", "w");
+$txt = "1";
+fwrite($f, $txt);
+fclose($f);
+	 $f = fopen("10BackupCount.txt", "w");
+$txt = "0";
+fwrite($f, $txt);
+fclose($f);
+	 }
+	 }
+	 
+	 else if  ($Date == '10'){
+	 if ( $DCount10 == '0'){
+	 unlink('C:\wamp\www\file11.txt');
+	 $f = fopen("10BackupCount.txt", "w");
+$txt = "1";
+fwrite($f, $txt);
+fclose($f);
+	 $f = fopen("11BackupCount.txt", "w");
+$txt = "0";
+fwrite($f, $txt);
+fclose($f);
+	 }
+	 }
+	 
+	 else if  ($Date == '11'){
+	 if ( $DCount11 == '0'){
+	 unlink('C:\wamp\www\file12.txt');
+	 $f = fopen("11BackupCount.txt", "w");
+$txt = "1";
+fwrite($f, $txt);
+fclose($f);
+	 $f = fopen("12BackupCount.txt", "w");
+$txt = "0";
+fwrite($f, $txt);
+fclose($f);
+	 }
+	 }
+	 
+	 else if  ($Date == '12'){
+	 if ( $DCount12 == '0'){
+	 unlink('C:\wamp\www\file01.txt');
+	 $f = fopen("12BackupCount.txt", "w");
+$txt = "1";
+fwrite($f, $txt);
+fclose($f);
+	 $f = fopen("01BackupCount.txt", "w");
+$txt = "0";
+fwrite($f, $txt);
+fclose($f);
+	 }
+ }
+
+	 
+?> 
 
 </body>
 </html>

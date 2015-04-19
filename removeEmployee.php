@@ -67,11 +67,9 @@ $rowID = mysqli_fetch_array($queryID);
     </nav>
 
 	<h2>Employee Records</h2>
-	
 	<table width="40%"  border="1" >
     <div id="head_nav">
-
-      <?php
+	<?php
 	$employee_query = "SELECT * FROM employee";
 	$result = mysqli_query($con, $employee_query);
 	$new_row = array();
@@ -104,35 +102,28 @@ $rowID = mysqli_fetch_array($queryID);
       <?php foreach($new_row as $studentID => $rows):?>
       <?php foreach($rows as $row): ?>
       <tr>
-        <td>
-          <?=$row['FirstName'];?>
-        </td>
-        <td>
-          <?=$row['LastName'];?>
-        </td>
-        <td>
-          <?=$row['StudentID'];?>
-        </td>
-        <td>
-          <?=$row['EmployeeType'];?>
-        </td>
-        <td>
-          <?=$row['PhoneNumber'];?>
-        </td>
-        <td>
-          <?=$row['Email'];?>
-        </td>
-        <td>
-          <?=$row['Address'];?>
-        </td>
+        <td><?=$row['FirstName'];?></td>
+        <td><?=$row['LastName'];?></td>
+        <td><?=$row['StudentID'];?></td>
+        <td><?=$row['EmployeeType'];?></td>
+        <td><?=$row['PhoneNumber'];?></td>
+        <td><?=$row['Email'];?></td>
+        <td><?=$row['Address'];?></td>
             <td><form action="remove.php" method="POST"> <button name="StudentID" class="btn btn-lg btn-primary"  type="submit" value ="<?php echo $row['StudentID']?>">Remove Employee</button></form></td>
-        <br>
 			</tr>
       <?php endforeach;?>
       <?php endforeach;?>
 
     </div>
       </table>
+
+
+
+	<p>  <?php
+    $dt = DateTime::createFromFormat('Y-m-d', date('Y-m-d'));
+    $dt->setTimeZone(new DateTimeZone('America/Indiana/Indianapolis'));
+    die($dt->format('M d Y g:i:s a'));
+    ?></p>
       
       </body>
      </html

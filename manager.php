@@ -67,7 +67,7 @@ $rowID = mysqli_fetch_array($queryID);
       </div>
     </nav>
 				
-    <h2>Here is the Monday-Friday schedeule for your unit:</h2>
+    <h2>Here is the Monday-Friday schedeule for your unit</h2>
 <?php
     
     $Unit_query = "SELECT Unit FROM employee WHERE Email = '$test'";
@@ -89,30 +89,31 @@ switch ($Unit_employee) {
          $logo = 'images/noyerlogocolor.gif';
          break;
     case 'Quiznos':
-         $logo = 'QuiznosSSS_oval.eps';
+         $logo = 'images/QuiznosSSS_oval.eps';
          break;
     case 'Retreat':
-         $logo = 'retreatlogocolor.gif';
+         $logo = 'images/retreatlogocolor.gif';
          break;
     case 'Tally':
-         $logo = 'studentcentertally.gif';
+         $logo = 'images/studentcentertally.gif';
          break;
     case 'BookMark':
-         $logo = 'bookmarklogo.gif';
+         $logo = 'images/bookmarklogo.gif';
          break;
     case 'TomJohn':
-         $logo = 'tomjohn.gif';
+         $logo = 'images/tomjohn.gif';
          break;
     case 'WoodWorth':
-         $logo = 'woodworthcommonslogo.gif';
+         $logo = 'images/woodworthcommonslogo.gif';
          break;
     case 'Burris':
-         $logo = 'burrislogo.gif';
+         $logo = 'images/burrislogo.gif';
          break;
 }
 
 ?> <img src = "<?php echo $logo ?>" alt = "test"/>	
 		<table width="40%"  border="1" >
+
     <div id="head_nav">
 	
 	<?php
@@ -154,7 +155,6 @@ switch ($Unit_employee) {
 				<td><?=$row['Day'];?></td>
 				<td><?=$row['FirstName'];?></td>
 				<td><?=$row['LastName'];?></td>
-				<br>
 			</tr>
 		<?php endforeach;?>
 	<?php endforeach;?>
@@ -162,5 +162,12 @@ switch ($Unit_employee) {
 
     </div>
 
+
+	<p><?php
+    $dt = DateTime::createFromFormat('Y-m-d', date('Y-m-d'));
+    $dt->setTimeZone(new DateTimeZone('America/Indiana/Indianapolis'));
+    die($dt->format('M d Y g:i:s a'));
+    ?>
+	</p>
 </body>
 </html>
