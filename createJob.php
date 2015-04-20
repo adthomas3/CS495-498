@@ -23,7 +23,7 @@ function NewJob()
               ('$Unit','$Job','$StartTime','$EndTime','$JobNumber','$Day','$StudentID')";
     if(mysqli_query($con, $insert))
 	{
-       // echo "Job Sucessfully Created";
+       //echo $EndTime;
 		header("Location: createJobSuccessful.html");
     }
 	else

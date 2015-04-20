@@ -55,8 +55,8 @@ $rowID = mysqli_fetch_array($queryID);
           <ul class="nav navbar-nav">
             <li class="active"><a href="manager.php"target="_self">Home</a></li>
 			<li><a href="announcement.php" target="_self">Announcements</a></li>
-			<li><a href="allRequests.php" target="_self">Requests</a></li>
 			<li><a href="ManagerssSchedule.php" target="_self">Weekend Schedules</a></li>
+			<li><a href="employeeInfo.php" target="_self">Employee Information</a></li>
 			<li><a href="javascript:window.print()">Print</a></li>
           </ul>
          

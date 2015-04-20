@@ -107,7 +107,7 @@ $rowID = mysqli_fetch_array($queryID);
 	
 	</div>
 	</table>
-    <h2>Here is the schedule for your unit:</h2>
+    <h2>Here is your schedule:</h2>
 
 	<?php
     $Unit_query = "SELECT Unit FROM employee WHERE Email = '$test'";
@@ -158,13 +158,14 @@ switch ($Unit_employee) {
     <div id="head_nav">
 	
 	<?php
-	$schedule_query = "SELECT * FROM schedule ORDER BY Job ASC WHERE studentID = $studentID";
+	$schedule_query = sprintf("SELECT * FROM schedule WHERE studentID = '%s' ORDER BY Job ASC", $studentID);
+	echo $studentID;
 	$result = mysqli_query($con, $schedule_query);
 	$new_row2 = array();
 		$studentID = $rowID['StudentID'];
 		$Unit = $rowID['Unit'];
-		$query2 = sprintf("SELECT Job, StartTime, EndTime, Day, JobNumber, Unit, FirstName, LastName FROM schedule WHERE Unit = '%s'
-					AND (Day='Monday' OR Day='Tuesday' OR Day='Wednesday' OR Day='Thursday' OR Day='Friday')", $Unit);
+		$query2 = sprintf("SELECT Job, StartTime, EndTime, Day, JobNumber, Unit, FirstName, LastName FROM schedule WHERE StudentID = '%s'
+					AND (Day='Monday' OR Day='Tuesday' OR Day='Wednesday' OR Day='Thursday' OR Day='Friday')", $studentID);
 		$schedule_result = mysqli_query($con, $query2);
 		while ($schedule_row = mysqli_fetch_assoc($schedule_result)){
 			$new_row2[$studentID][]= array('Job' => $schedule_row['Job'],
@@ -190,17 +191,7 @@ switch ($Unit_employee) {
 				<td><?=$row['StartTime'];?></td>
 				<td><?=$row['EndTime'];?></td>
 				<td><?=$row['Day'];?></td>
-				<td><?php
-					$alreadyAskedOff = sprintf("SELECT JobNumber FROM requests WHERE JobNumber = '%s'", $row['JobNumber']);
-					$schedule_result = mysqli_query($con, $alreadyAskedOff);
-					$row2 = mysqli_fetch_row($schedule_result);
-					$JobNumberRequested = $row2[0];
-				if(!$JobNumberRequested):
-				?><form action="requestoff.php" method="POST"> <button name="JobNumber" class="btn btn-lg btn-primary"  type="submit" 
-						value ="<?php echo $row['JobNumber']?>">Request Shift off</button></form><?php 
-				else:
-				echo 'You already asked this shift off';
-				endif ?></td>
+				
 			</tr>
 		<?php endforeach;?>
 	<?php endforeach;?>

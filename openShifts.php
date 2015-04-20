@@ -64,14 +64,18 @@ $rowID = mysqli_fetch_array($queryID);
       </div>
     </nav>
 
-
+ 
 <h2>All open shifts:</h2>
 <?php
+	$Unit = sprintf("SELECT Unit FROM employee WHERE Email = '%s'", $test);
+	$Unit_query = mysqli_query($con, $Unit);
+	$row3 = mysqli_fetch_row($Unit_query);
+	$Unit_employee = $row3[0]; 
 	$schedule_query = "SELECT * FROM schedule";
 	$result = mysqli_query($con, $schedule_query);
 	$new_row = array();
 		$studentID = $row['StudentID'];
-		$query = sprintf("SELECT Job, StartTime, EndTime, Day, JobNumber FROM schedule WHERE StudentID = '0'");
+		$query = sprintf("SELECT Job, StartTime, EndTime, Day, JobNumber, Unit FROM schedule WHERE StudentID = '0' AND Unit = '$Unit_employee'");
 		$schedule_result = mysqli_query($con, $query);
 		while ($schedule_row = mysqli_fetch_assoc($schedule_result)){
 			$new_row[$studentID][]= array('Job' => $schedule_row['Job'],
@@ -80,6 +84,15 @@ $rowID = mysqli_fetch_array($queryID);
 								'Day' => $schedule_row['Day']);
 		}
      ?>
+	 
+   <table width="40%" border="1" >
+    <div id="head_nav">
+		<tr>
+			<td>Job</td>
+			<td>Start Time</td>
+			<td>End Time</td>
+			<td>Day</td>
+		</tr>
 	<?php foreach($new_row as $studentID => $rows):?>
 		<?php foreach($rows as $row): ?>
 			<tr>
@@ -91,31 +104,11 @@ $rowID = mysqli_fetch_array($queryID);
 			</tr>
 		<?php endforeach;?>
 	<?php endforeach;?>
-   <table width="80%" align="center" >
-    <div id="head_nav">
 	
-<h2>All temp shifts:</h2>
-<?php
-	$schedule_query = "SELECT * FROM requests";
-	$result = mysqli_query($con, $schedule_query);
-	$new_row = array();
-		$query = sprintf("Select JobNumber FROM requests WHERE StudentID1 NOT IN ($studentID) AND StudentID2 = '0'");
-		$schedule_result = mysqli_query($con, $query);
-		while ($schedule_row = mysqli_fetch_assoc($schedule_result)){
-			$new_row[$studentID][]= array('JobNumber' => $schedule_row['JobNumber']);
-		}
-     ?>
-	<?php foreach($new_row as $studentID2 => $rows):?>
-		<?php foreach($rows as $row): ?>
-			<tr>
-				<td><?=$row['JobNumber'];?></td>
-				<td><form action="requestToCover.php" method="POST"> <button name="JobNumber" class="btn btn-lg btn-primary"  type="submit" value ="<?php echo $row['JobNumber']?>">Request Shift</button></form></td>
-				<br>
-			</tr>
-		<?php endforeach;?>
-	<?php endforeach;?>
-   <table width="80%" align="center" >
-    <div id="head_nav">
+</div>
+</table>
+	
+
 
 
 	</body>

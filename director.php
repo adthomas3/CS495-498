@@ -56,10 +56,9 @@ $rowID = mysqli_fetch_array($queryID);
             <li class="active"><a href="director.php"target="_self">Home</a></li>
 			<li><a href="announcement.php" target="_self">Announcements</a></li>
 			<li><a href="createEmployee.html" target="_self">Add Employee</a></li>
-			<li><a href="CreateJob.html" target="_self">Create Job</a></li>
 			<li><a href="removeEmployee.php" target="_self">Employee Information</a></li>
-			<li><a href="DirectorssSchedule.php" target="_self">Weekend Schedules</a></li>
-			<li><a href="Backup.php" target="_self">Backups</a></li>
+			<li><a href="CreateJob.html" target="_self">Create Job</a></li>
+			<li><a href="delete.php" target="_self">Remove Job</a></li>
             <li><a href="javascript:window.print()">Print</a></li>
 
           </ul>
@@ -86,7 +85,8 @@ $rowID = mysqli_fetch_array($queryID);
 		$Unit = $rowID['Unit'];
 		$query2 = sprintf("SELECT Job, StartTime, EndTime, Day, JobNumber, Unit, FirstName, LastName,StudentID FROM schedule 
 		WHERE(Day='Monday' OR Day='Tuesday' OR Day='Wednesday' OR Day='Thursday' OR Day='Friday') 
-		ORDER BY CASE Day
+		ORDER BY UNIT ASC,
+		CASE Day
 					WHEN 'Sunday' THEN 1
 					WHEN 'Monday' THEN 2
 					WHEN 'Tuesday' THEN 3

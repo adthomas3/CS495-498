@@ -47,9 +47,7 @@ $rowID = mysqli_fetch_array($queryID);
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <ul id="nav">
-        <!-- If director, go to director.html, if student, go to student.html, if manager, go to mangager.html --> 
-         <!-- Options will vary based on employee type.... or create separate html pages for respective users... not real sure yet... may have to redo everything 
-             student will have to make requests --> 
+  
             
             
 	<nav class="navbar navbar-default navbar-fixed-top">
@@ -69,21 +67,29 @@ $rowID = mysqli_fetch_array($queryID);
       </div>
     </nav>
 
-
-        <!-- If director, show all units -->      
-    <h2>Here is the Saturday/Sunday schedule for your unit</h2>
-
+    
+    <h2>Here is the Weekend schedule for your unit</h2>
 		<table width="40%"  border="1" >
     <div id="head_nav">
-
 	<?php
-	$schedule_query = "SELECT * FROM schedule ORDER BY Job ASC";
+	$schedule_query = "SELECT Unit FROM employee WHERE email = '$test'";
 	$result = mysqli_query($con, $schedule_query);
 	$new_row2 = array();
 		$studentID = $rowID['StudentID'];
 		$Unit = $rowID['Unit'];
-		$query2 = sprintf("SELECT Job, StartTime, EndTime, Day, JobNumber, Unit, FirstName, LastName FROM schedule WHERE
-					Day='Saturday' OR Day='Sunday' AND Unit = '$Unit'");
+		$query2 = sprintf("SELECT Job, StartTime, EndTime, Day, JobNumber, Unit, FirstName, LastName, StudentID FROM schedule 
+		WHERE(Day='Saturday-1' OR Day='Saturday-2' OR Day='Sunday-1' OR Day='Sunday-2') 
+		ORDER BY UNIT ASC,
+		CASE Day
+					WHEN 'Sunday' THEN 1
+					WHEN 'Monday' THEN 2
+					WHEN 'Tuesday' THEN 3
+					WHEN 'Wednesday' THEN 4
+					WHEN 'Thursday' THEN 5
+					WHEN 'Friday' THEN 6
+					WHEN 'Saturday' THEN 7
+					ELSE NULL
+					END ASC, StartTime ASC");
 		$schedule_result = mysqli_query($con, $query2);
 		while ($schedule_row = mysqli_fetch_assoc($schedule_result)){
 			$new_row2[$studentID][]= array('Job' => $schedule_row['Job'],
@@ -93,7 +99,8 @@ $rowID = mysqli_fetch_array($queryID);
 								'JobNumber' => $schedule_row['JobNumber'],
 								'Unit' => $schedule_row['Unit'],
 								'FirstName' => $schedule_row['FirstName'],
-								'LastName' => $schedule_row['LastName']);
+								'LastName' => $schedule_row['LastName'],
+								'StudentID' => $schedule_row['StudentID']);
 		}
      ?>
 			<tr> 
@@ -102,8 +109,7 @@ $rowID = mysqli_fetch_array($queryID);
 				<td> Start Time </td>
 				<td> End Time </td>
 				<td> Day </td>
-				<td> First Name </td>
-				<td> Last Name </td>
+				<td> Name </td>
 	 
 	<?php foreach($new_row2 as $studentID => $rows):?>
 			<?php foreach($rows as $row): ?>
@@ -113,8 +119,18 @@ $rowID = mysqli_fetch_array($queryID);
 				<td><?=$row['StartTime'];?></td>
 				<td><?=$row['EndTime'];?></td>
 				<td><?=$row['Day'];?></td>
-				<td><?=$row['FirstName'];?></td>
-				<td><?=$row['LastName'];?></td>
+				<td><?=$row['FirstName'];?><br><?=$row['LastName'];?></td>
+				<td><?php 
+				if($row['StudentID']==0):
+						?><form method="POST" action="giveShiftM.php">
+						Input Student ID of the student you wish to have this shift:<br />
+						<input type="text" name="StudentIDgiven"></input>
+						<button class="btn btn-lg btn-primary"  type="submit" value ="<?php echo $row['JobNumber']?>" name ="JobNumber">Give Shift</button></form><?php 
+					else:
+						?><form method="POST" action="removeShiftM.php">
+						<button class="btn btn-lg btn-primary"  type="submit" value ="<?php echo $row['JobNumber']?>" name ="JobNumber">Remove shift from student</button></form><?php
+					endif;
+					?></td>
 			</tr>
 		<?php endforeach;?>
 	<?php endforeach;?>
@@ -122,6 +138,7 @@ $rowID = mysqli_fetch_array($queryID);
 
     </div>
 
+	</table>
 
 	<p><?php
     $dt = DateTime::createFromFormat('Y-m-d', date('Y-m-d'));
